@@ -1,0 +1,29 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+SexAge<-read.csv("IPUMS-Sex-Age.csv")
+
+US_SexAge<-filter(SexAge, Country=="United States")
+blah<-filter(US_SexAge, Year=="1990")
+head(US_SexAge)
+
+ggplot(data=blah)+
+  geom_line(mapping=aes(x=Age, y=Count, color=Sex))
+```
+
+```{r}
+SexEd<-read.csv("IPUMS-Sex-EdAttain.csv")
+US_SexEd<-filter(SexEd, Country=="United States")
+
+gal<-filter(US_SexEd, Sex=="Female")
+guy<-filter(US_SexEd, Sex=="Male")
+
+ggplot(gal, aes(fill=EdAttain, y=Count, x=Year))+
+  geom_bar(position="fill", stat="identity")
+ggplot(guy, aes(fill=EdAttain, y=Count, x=Year))+
+  geom_bar(position="fill", stat="identity")
+```
+
